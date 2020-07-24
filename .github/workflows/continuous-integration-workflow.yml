@@ -42,9 +42,8 @@ jobs:
           buildDirectory: '${{ runner.workspace }}/cmakebuild'
 
       - name: 'Test asyncly'
-        run: |
-          cd "${{ runner.workspace }}/cmakebuild"
-          ctest -C Release -V
+        run: ctest -C Release -V
+        working-directory: '${{ runner.workspace }}/cmakebuild'
 
   bazel:
     name: Bazel ${{ matrix.os }}
