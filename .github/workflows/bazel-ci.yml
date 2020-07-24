@@ -17,7 +17,7 @@ jobs:
           - os: windows-2019
             bazel_args: ''
     env:
-      BAZEL_VS=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise
+      BAZEL_VS=C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise
 
     steps:
       - uses: actions/checkout@main
