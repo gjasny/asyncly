@@ -51,16 +51,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macOS-latest, ubuntu-18.04, windows-2019]
+        os: [macOS-latest, ubuntu-latest, windows-latest]
         include:
           - os: macOS-latest
             bazel_args: '--cxxopt=-std=c++14'
-          - os: ubuntu-18.04
+          - os: ubuntu-latest
             bazel_args: '--cxxopt=-std=c++14'
-          - os: windows-2019
+          - os: windows-latest
             bazel_args: ''
-    env:
-      BAZEL_VS: C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise
 
     steps:
       - uses: actions/checkout@main
