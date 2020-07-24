@@ -23,7 +23,7 @@ jobs:
           vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
           vcpkgGitCommitId: '2020.04'
 
-      - name: 'Run CMake with Ninja'
+      - name: 'Build asyncly'
         uses: lukka/run-cmake@v2.5
         with:
           cmakeListsOrSettingsJson: CMakeListsTxtBasic
@@ -31,8 +31,13 @@ jobs:
           #cmakeListsTxtPath: '${{ github.workspace }}/cmakesettings.json/CMakeLists.txt'
           cmakeBuildType: 'Release'
           useVcpkgToolchainFile: true
-          #buildDirectory: '${{ runner.workspace }}/b//unixmakefiles'
+          buildDirectory: '${{ runner.workspace }}/cmakebuild'
           #cmakeAppendedArgs: '-GNinja'
+
+      - name: 'Test asyncly'
+        run: |
+          cd "${{ runner.workspace }}/cmakebuild"
+          ctest -C Release -V
       #- name: Prepare
       #  run: .github/scripts/run-${{ matrix.buildsystem }}-prepare ${{ matrix.os }}
       #- name: Test
