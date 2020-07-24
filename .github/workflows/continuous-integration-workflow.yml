@@ -8,8 +8,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        buildsystem: [bazel, cmake]
-        os: [macOS-latest, ubuntu-18.04, windows-2019]
+        buildsystem: [cmake] #[bazel, cmake]
+        os: [ubuntu-18.04] #[macOS-latest, ubuntu-18.04, windows-2019]
     steps:
       - uses: actions/checkout@master
       - name: Prepare
