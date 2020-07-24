@@ -23,16 +23,16 @@ jobs:
           vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
           vcpkgGitCommitId: '077c0746be3773fdd443af52cbe5c3cc26379a15'
 
-    - name: 'Run CMake with Ninja'
-      uses: lukka/run-cmake@v2.5
-      with:
-        cmakeListsOrSettingsJson: CMakeListsTxtBasic
-        #cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
-        #cmakeListsTxtPath: '${{ github.workspace }}/cmakesettings.json/CMakeLists.txt'
-        cmakeBuildType: 'Release'
-        useVcpkgToolchainFile: true
-        buildDirectory: '${{ runner.workspace }}/b//unixmakefiles'
-        #cmakeAppendedArgs: '-GNinja'
+      - name: 'Run CMake with Ninja'
+        uses: lukka/run-cmake@v2.5
+        with:
+          cmakeListsOrSettingsJson: CMakeListsTxtBasic
+          #cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
+          #cmakeListsTxtPath: '${{ github.workspace }}/cmakesettings.json/CMakeLists.txt'
+          cmakeBuildType: 'Release'
+          useVcpkgToolchainFile: true
+          #buildDirectory: '${{ runner.workspace }}/b//unixmakefiles'
+          #cmakeAppendedArgs: '-GNinja'
       #- name: Prepare
       #  run: .github/scripts/run-${{ matrix.buildsystem }}-prepare ${{ matrix.os }}
       #- name: Test
