@@ -21,7 +21,7 @@ jobs:
           vcpkgArguments: 'benchmark function2 gtest prometheus-cpp boost-asio boost-callable-traits boost-chrono boost-hana boost-optional boost-mp11 boost-thread boost-variant2'
           vcpkgTriplet: 'x64-linux'
           vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
-          vcpkgGitCommitId: '077c0746be3773fdd443af52cbe5c3cc26379a15'
+          vcpkgGitCommitId: '2020.04'
 
       - name: 'Run CMake with Ninja'
         uses: lukka/run-cmake@v2.5
