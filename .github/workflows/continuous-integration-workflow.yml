@@ -11,11 +11,11 @@ jobs:
         buildsystem: [cmake] #[bazel, cmake]
         os: [ubuntu-18.04] #[macOS-latest, ubuntu-18.04, windows-2019]
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
       #- uses: lukka/get-cmake@latest
 
       - name: Restore artifacts, or run vcpkg, build and cache artifacts
-        uses: lukka/run-vcpkg@master
+        uses: lukka/run-vcpkg@v3.2
         id: runvcpkg
         with:
           vcpkgArguments: 'benchmark function2 gtest prometheus-cpp boost-asio boost-callable-traits boost-chrono boost-hana boost-optional boost-mp11 boost-thread boost-variant2'
