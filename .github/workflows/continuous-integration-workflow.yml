@@ -12,7 +12,18 @@ jobs:
         os: [ubuntu-18.04] #[macOS-latest, ubuntu-18.04, windows-2019]
     steps:
       - uses: actions/checkout@master
-      - name: Prepare
-        run: .github/scripts/run-${{ matrix.buildsystem }}-prepare ${{ matrix.os }}
-      - name: Test
-        run: .github/scripts/run-${{ matrix.buildsystem }}-test ${{ matrix.os }}
+      #- uses: lukka/get-cmake@latest
+
+      - name: Restore artifacts, or run vcpkg, build and cache artifacts
+        uses: lukka/run-vcpkg@master
+        id: runvcpkg
+        with:
+          vcpkgArguments: 'benchmark function2 gtest prometheus-cpp boost-asio boost-callable-traits boost-chrono boost-hana boost-optional boost-mp11 boost-thread boost-variant2'
+          vcpkgTriplet: 'x64-linux'
+          vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
+          vcpkgGitCommitId: '077c0746be3773fdd443af52cbe5c3cc26379a15'
+
+      #- name: Prepare
+      #  run: .github/scripts/run-${{ matrix.buildsystem }}-prepare ${{ matrix.os }}
+      #- name: Test
+      #  run: .github/scripts/run-${{ matrix.buildsystem }}-test ${{ matrix.os }}
