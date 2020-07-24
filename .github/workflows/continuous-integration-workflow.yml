@@ -1,8 +1,8 @@
-name: Continuous Integration CMake
+name: Continuous Integration
 on: [push, pull_request]
 
 jobs:
-  build:
+  cmake:
     name: CMake ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -45,3 +45,31 @@ jobs:
         run: |
           cd "${{ runner.workspace }}/cmakebuild"
           ctest -C Release -V
+
+  bazel:
+    name: Bazel ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macOS-latest, ubuntu-18.04, windows-2019]
+        include:
+          - os: macOS-latest
+            bazel_args: '--cxxopt=-std=c++14'
+          - os: ubuntu-18.04
+            bazel_args: '--cxxopt=-std=c++14'
+          - os: windows-2019
+            bazel_args: ''
+
+    steps:
+      - uses: actions/checkout@main
+
+      - name: 'Build and test asyncly'
+        env:
+          BAZEL_VS=C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise
+        run: bazel test ${{ matrix.bazel_args }} --test_output=all //...
+
+      - name: 'Run asyncly benchmark'
+        env:
+          BAZEL_VS=C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise
+        run: bazel run ${{ matrix.bazel_args }} -c opt //Test/Performance/...
